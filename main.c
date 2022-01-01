@@ -3,12 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 
-void print(char* string)
-{
-    for (int i = 0; i < strlen(string); i++)
-        putchar(string[i]);
-}
-
 char* GetRepoName(char* repo)
 {
     int len = strlen(repo);
