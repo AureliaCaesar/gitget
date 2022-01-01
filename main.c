@@ -109,14 +109,15 @@ int main(int argc, char** argv)
     if (chdir(actualRepoName) != 0)
     {
         puts("Directory change failed.");
+        free(actualRepoName);
         return -3;
     }
-    free(actualRepoName);
 
     puts("Building...");
     if (system("sudo make") != 0)
     {
         puts("Build failed.");
+        free(actualRepoName);
         return -4;
     }
 
@@ -124,8 +125,29 @@ int main(int argc, char** argv)
     if (system("sudo make install") != 0)
     {
         puts("Install failed.");
+        free(actualRepoName);
         return -5;
     }
+    
+    if (chdir("../") !+ 0)
+    {
+        puts("Cleanup failed.");
+        free(actualRepoName);
+        return -6;
+    }
+    
+    // I'm lazy, call system
+    char* rmBase = "rm -rf ";
+    char* rmFull = ConcatenateStrings(rmBase, actualRepoName);
+    
+    if (system(rmFull) != 0)
+    {
+        puts("Cleanup failed.");
+        free(actualRepoName);
+        return -7;
+    }
+        
+    free(actualRepoName);
 
     puts("Done.");
     return 0;
