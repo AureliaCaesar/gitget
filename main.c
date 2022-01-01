@@ -100,6 +100,7 @@ int main(int argc, char** argv)
     if (system(cloneString) != 0)
     {
         puts("Git clone failed.");
+        free(cloneString);
         return -2;
     }
     free(cloneString);
@@ -143,10 +144,12 @@ int main(int argc, char** argv)
     if (system(rmFull) != 0)
     {
         puts("Cleanup failed.");
+        free(rmFull);
         free(actualRepoName);
         return -7;
     }
-        
+    
+    free(rmFull);
     free(actualRepoName);
 
     puts("Done.");
