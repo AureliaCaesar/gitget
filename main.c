@@ -129,7 +129,7 @@ int main(int argc, char** argv)
         return -5;
     }
     
-    if (chdir("../") !+ 0)
+    if (chdir("../") != 0)
     {
         puts("Cleanup failed.");
         free(actualRepoName);
