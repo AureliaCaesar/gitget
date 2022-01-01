@@ -1,3 +1,3 @@
 #!/bin/bash
 ./build.sh
-cp ./bin/gitget /bin/gitget
+sudo cp ./bin/gitget /bin/gitget
